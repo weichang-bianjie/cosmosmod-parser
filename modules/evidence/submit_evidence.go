@@ -2,6 +2,7 @@ package evidence
 
 import (
 	"encoding/json"
+	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
 )
 

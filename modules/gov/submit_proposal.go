@@ -1,9 +1,10 @@
 package gov
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	models "github.com/kaifei-bianjie/common-parser/types"
+	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
-	"github.com/kaifei-bianjie/cosmosmod-parser/utils"
 )
 
 type DocTxMsgSubmitProposal struct {

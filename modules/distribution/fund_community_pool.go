@@ -1,14 +1,15 @@
 package distribution
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	"github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 // msg struct for delegation withdraw for all of the delegator's delegations
 type DocTxMsgFundCommunityPool struct {
-	Amount    []models.Coin `bson:"amount"`
-	Depositor string        `bson:"depositor"`
+	Amount    []types.Coin `bson:"amount"`
+	Depositor string       `bson:"depositor"`
 }
 
 func (m *DocTxMsgFundCommunityPool) GetType() string {
@@ -18,7 +19,7 @@ func (m *DocTxMsgFundCommunityPool) GetType() string {
 func (m *DocTxMsgFundCommunityPool) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgFundCommunityPool)
 	m.Depositor = msg.Depositor
-	m.Amount = models.BuildDocCoins(msg.Amount)
+	m.Amount = types.BuildDocCoins(msg.Amount)
 }
 func (m *DocTxMsgFundCommunityPool) HandleTxMsg(v SdkMsg) MsgDocInfo {
 

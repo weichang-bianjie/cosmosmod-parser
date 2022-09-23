@@ -4,8 +4,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/feegrant"
 	"github.com/gogo/protobuf/proto"
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	"github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 type DocTxMsgGrantAllowance struct {
@@ -18,15 +19,15 @@ type DocTxMsgGrantAllowance struct {
 
 type (
 	Allowance struct {
-		SpendLimit []models.Coin `bson:"spend_limit"`
-		Expiration int64         `bson:"expiration"`
+		SpendLimit []types.Coin `bson:"spend_limit"`
+		Expiration int64        `bson:"expiration"`
 	}
 	PeriodicAllowance struct {
-		Basic            Allowance     `bson:"basic"`
-		Period           int64         `bson:"period"`
-		PeriodSpendLimit []models.Coin `bson:"period_spend_limit"`
-		PeriodCanSpend   []models.Coin `bson:"period_can_spend"`
-		PeriodReset      int64         `bson:"period_reset"`
+		Basic            Allowance    `bson:"basic"`
+		Period           int64        `bson:"period"`
+		PeriodSpendLimit []types.Coin `bson:"period_spend_limit"`
+		PeriodCanSpend   []types.Coin `bson:"period_can_spend"`
+		PeriodReset      int64        `bson:"period_reset"`
 	}
 
 	AllowedMsgAllowance struct {
@@ -59,12 +60,12 @@ func (m *DocTxMsgGrantAllowance) BuildMsg(v interface{}) {
 			}
 			m.PeriodicAllowance = &PeriodicAllowance{
 				Basic: Allowance{
-					SpendLimit: models.BuildDocCoins(period.Basic.SpendLimit),
+					SpendLimit: types.BuildDocCoins(period.Basic.SpendLimit),
 					Expiration: expiration,
 				},
 				Period:           int64(period.Period.Seconds()),
-				PeriodSpendLimit: models.BuildDocCoins(period.PeriodSpendLimit),
-				PeriodCanSpend:   models.BuildDocCoins(period.PeriodCanSpend),
+				PeriodSpendLimit: types.BuildDocCoins(period.PeriodSpendLimit),
+				PeriodCanSpend:   types.BuildDocCoins(period.PeriodCanSpend),
 				PeriodReset:      period.PeriodReset.Unix(),
 			}
 		case "/" + proto.MessageName(&feegrant.AllowedMsgAllowance{}):
@@ -95,7 +96,7 @@ func getBasicAllowance(protoValue []byte) Allowance {
 	}
 
 	return Allowance{
-		SpendLimit: models.BuildDocCoins(basic.SpendLimit),
+		SpendLimit: types.BuildDocCoins(basic.SpendLimit),
 		Expiration: expiration,
 	}
 }

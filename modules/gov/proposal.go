@@ -1,7 +1,7 @@
 package gov
 
 import (
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
+	models "github.com/kaifei-bianjie/common-parser/types"
 	"time"
 )
 

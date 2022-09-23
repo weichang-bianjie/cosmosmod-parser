@@ -1,6 +1,7 @@
 package slashing
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
 )
 

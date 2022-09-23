@@ -1,8 +1,9 @@
 package staking
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	models "github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 // MsgBeginUnbonding - struct for unbonding transactions

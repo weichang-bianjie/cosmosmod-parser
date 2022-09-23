@@ -1,8 +1,9 @@
 package bank
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	"github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 type (
@@ -12,8 +13,8 @@ type (
 		TempData []string `bson:"-"`
 	}
 	Item struct {
-		Address string        `bson:"address"`
-		Coins   []models.Coin `bson:"coins"`
+		Address string       `bson:"address"`
+		Coins   []types.Coin `bson:"coins"`
 	}
 )
 
@@ -24,11 +25,11 @@ func (m *DocMsgMultiSend) GetType() string {
 func (m *DocMsgMultiSend) BuildMsg(v interface{}) {
 	msg := v.(*MsgMultiSend)
 	for _, one := range msg.Inputs {
-		m.Inputs = append(m.Inputs, Item{Address: one.Address, Coins: models.BuildDocCoins(one.Coins)})
+		m.Inputs = append(m.Inputs, Item{Address: one.Address, Coins: types.BuildDocCoins(one.Coins)})
 		m.TempData = append(m.TempData, one.Address)
 	}
 	for _, one := range msg.Outputs {
-		m.Outputs = append(m.Outputs, Item{Address: one.Address, Coins: models.BuildDocCoins(one.Coins)})
+		m.Outputs = append(m.Outputs, Item{Address: one.Address, Coins: types.BuildDocCoins(one.Coins)})
 		m.TempData = append(m.TempData, one.Address)
 	}
 

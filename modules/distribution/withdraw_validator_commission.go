@@ -1,6 +1,9 @@
 package distribution
 
-import . "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+)
 
 // msg struct for validator withdraw
 type DocTxMsgWithdrawValidatorCommission struct {

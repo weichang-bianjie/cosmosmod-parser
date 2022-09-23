@@ -1,7 +1,6 @@
 package msgs
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 	crisis "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
@@ -10,7 +9,6 @@ import (
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
 	slashing "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 const (
@@ -20,13 +18,13 @@ const (
 	MsgTypeGrantAllowance  = "grant_allowance"
 	MsgTypeRevokeAllowance = "revoke_allowance"
 
-	MsgTypeStakeCreateValidator           = "create_validator"
-	MsgTypeStakeEditValidator             = "edit_validator"
-	MsgTypeStakeDelegate                  = "delegate"
-	MsgTypeStakeBeginUnbonding            = "begin_unbonding"
-	MsgTypeBeginRedelegate                = "begin_redelegate"
-	MsgTypeUnjail                         = "unjail"
-	MsgTypeUnjailValidator                = "unjail_validator"
+	MsgTypeStakeCreateValidator = "create_validator"
+	MsgTypeStakeEditValidator   = "edit_validator"
+	MsgTypeStakeDelegate        = "delegate"
+	MsgTypeStakeBeginUnbonding  = "begin_unbonding"
+	MsgTypeBeginRedelegate      = "begin_redelegate"
+	MsgTypeUnjail               = "unjail"
+
 	MsgTypeSetWithdrawAddress             = "set_withdraw_address"
 	MsgTypeWithdrawDelegatorReward        = "withdraw_delegator_reward"
 	MsgTypeMsgFundCommunityPool           = "fund_community_pool"
@@ -41,34 +39,23 @@ const (
 )
 
 type (
-	MsgDocInfo struct {
-		DocTxMsg models.TxMsg
-		Addrs    []string
-		Signers  []string
-	}
-	SdkMsg sdk.Msg
-	Msg    models.Msg
-
-	Coin models.Coin
-
-	Coins []*Coin
-
 	MsgSend      = bank.MsgSend
 	MsgMultiSend = bank.MsgMultiSend
 
-	MsgStakeCreate                 = stake.MsgCreateValidator
-	MsgStakeEdit                   = stake.MsgEditValidator
-	MsgStakeDelegate               = stake.MsgDelegate
-	MsgStakeBeginUnbonding         = stake.MsgUndelegate
-	MsgBeginRedelegate             = stake.MsgBeginRedelegate
+	MsgStakeCreate         = stake.MsgCreateValidator
+	MsgStakeEdit           = stake.MsgEditValidator
+	MsgStakeDelegate       = stake.MsgDelegate
+	MsgStakeBeginUnbonding = stake.MsgUndelegate
+	MsgBeginRedelegate     = stake.MsgBeginRedelegate
+	StakeValidator         = stake.Validator
+	Delegation             = stake.Delegation
+	UnbondingDelegation    = stake.UnbondingDelegation
+
 	MsgUnjail                      = slashing.MsgUnjail
 	MsgStakeSetWithdrawAddress     = distribution.MsgSetWithdrawAddress
 	MsgWithdrawDelegatorReward     = distribution.MsgWithdrawDelegatorReward
 	MsgFundCommunityPool           = distribution.MsgFundCommunityPool
 	MsgWithdrawValidatorCommission = distribution.MsgWithdrawValidatorCommission
-	StakeValidator                 = stake.Validator
-	Delegation                     = stake.Delegation
-	UnbondingDelegation            = stake.UnbondingDelegation
 
 	MsgGrantAllowance  = feegrant.MsgGrantAllowance
 	MsgRevokeAllowance = feegrant.MsgRevokeAllowance

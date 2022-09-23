@@ -1,6 +1,7 @@
 package gov
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
 )
 
@@ -11,15 +12,15 @@ type DocTxMsgVote struct {
 	Option     int32  `bson:"option"`      //  option from OptionSet chosen by the voter
 }
 
-func (doctx *DocTxMsgVote) GetType() string {
+func (m *DocTxMsgVote) GetType() string {
 	return MsgTypeVote
 }
 
-func (doctx *DocTxMsgVote) BuildMsg(txMsg interface{}) {
+func (m *DocTxMsgVote) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgVote)
-	doctx.Voter = msg.Voter
-	doctx.Option = int32(msg.Option)
-	doctx.ProposalID = int64(msg.ProposalId)
+	m.Voter = msg.Voter
+	m.Option = int32(msg.Option)
+	m.ProposalID = int64(msg.ProposalId)
 }
 
 func (m *DocTxMsgVote) HandleTxMsg(v SdkMsg) MsgDocInfo {

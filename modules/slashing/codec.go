@@ -2,7 +2,7 @@ package slashing
 
 import (
 	"github.com/cosmos/cosmos-sdk/x/slashing"
-	"github.com/kaifei-bianjie/cosmosmod-parser/codec"
+	"github.com/kaifei-bianjie/common-parser/codec"
 )
 
 func init() {

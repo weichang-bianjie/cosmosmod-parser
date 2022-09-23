@@ -2,8 +2,9 @@ package staking
 
 import (
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	"github.com/kaifei-bianjie/cosmosmod-parser/utils"
 )
 
 // MsgCreateValidator defines an SDK message for creating a new validator.

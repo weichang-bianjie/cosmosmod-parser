@@ -3,8 +3,8 @@ package integration
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/kaifei-bianjie/cosmosmod-parser/codec"
-	"github.com/kaifei-bianjie/cosmosmod-parser/utils"
+	"github.com/kaifei-bianjie/common-parser/codec"
+	"github.com/kaifei-bianjie/common-parser/utils"
 )
 
 func (s IntegrationTestSuite) TestGov() {

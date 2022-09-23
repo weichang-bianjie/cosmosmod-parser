@@ -1,6 +1,9 @@
 package gov
 
-import . "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+)
 
 // MsgVote
 type DocTxMsgVoteWeighted struct {

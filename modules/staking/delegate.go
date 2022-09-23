@@ -1,8 +1,9 @@
 package staking
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	models "github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 // MsgDelegate - struct for bonding transactions
@@ -12,15 +13,15 @@ type DocTxMsgDelegate struct {
 	Amount           Coin   `bson:"amount"`
 }
 
-func (doctx *DocTxMsgDelegate) GetType() string {
+func (m *DocTxMsgDelegate) GetType() string {
 	return MsgTypeStakeDelegate
 }
 
-func (doctx *DocTxMsgDelegate) BuildMsg(txMsg interface{}) {
+func (m *DocTxMsgDelegate) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgStakeDelegate)
-	doctx.ValidatorAddress = msg.ValidatorAddress
-	doctx.DelegatorAddress = msg.DelegatorAddress
-	doctx.Amount = Coin(models.BuildDocCoin(msg.Amount))
+	m.ValidatorAddress = msg.ValidatorAddress
+	m.DelegatorAddress = msg.DelegatorAddress
+	m.Amount = Coin(models.BuildDocCoin(msg.Amount))
 }
 func (m *DocTxMsgDelegate) HandleTxMsg(v SdkMsg) MsgDocInfo {
 

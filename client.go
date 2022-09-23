@@ -1,11 +1,13 @@
 package cosmosmod_parser
 
 import (
+	. "github.com/kaifei-bianjie/common-parser"
 	"github.com/kaifei-bianjie/cosmosmod-parser/codec"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/auth"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/bank"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/crisis"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/distribution"
+	"github.com/kaifei-bianjie/cosmosmod-parser/modules/evidence"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/feegrant"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/gov"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/params"
@@ -35,7 +37,7 @@ func NewMsgClient() MsgClient {
 		Bank:         bank.NewClient(),
 		Crisis:       crisis.NewClient(),
 		Distribution: distribution.NewClient(),
-		Evidence:     distribution.NewClient(),
+		Evidence:     evidence.NewClient(),
 		Feegrant:     feegrant.NewClient(),
 		Gov:          gov.NewClient(),
 		Params:       params.NewClient(),

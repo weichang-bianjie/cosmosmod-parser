@@ -1,15 +1,16 @@
 package gov
 
 import (
+	. "github.com/kaifei-bianjie/common-parser/modules"
+	"github.com/kaifei-bianjie/common-parser/types"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
-	models "github.com/kaifei-bianjie/cosmosmod-parser/types"
 )
 
 // MsgDeposit
 type DocTxMsgDeposit struct {
-	ProposalID int64         `bson:"proposal_id"` // ID of the proposal
-	Depositor  string        `bson:"depositor"`   // Address of the depositor
-	Amount     []models.Coin `bson:"amount"`      // Coins to add to the proposal's deposit
+	ProposalID int64        `bson:"proposal_id"` // ID of the proposal
+	Depositor  string       `bson:"depositor"`   // Address of the depositor
+	Amount     []types.Coin `bson:"amount"`      // Coins to add to the proposal's deposit
 }
 
 func (doctx *DocTxMsgDeposit) GetType() string {
@@ -19,7 +20,7 @@ func (doctx *DocTxMsgDeposit) GetType() string {
 func (doctx *DocTxMsgDeposit) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgDeposit)
 	doctx.Depositor = msg.Depositor
-	doctx.Amount = models.BuildDocCoins(msg.Amount)
+	doctx.Amount = types.BuildDocCoins(msg.Amount)
 	doctx.ProposalID = int64(msg.ProposalId)
 }
 

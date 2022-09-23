@@ -2,6 +2,7 @@ package bank
 
 import (
 	"github.com/cosmos/cosmos-sdk/types"
+	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
 )
 
