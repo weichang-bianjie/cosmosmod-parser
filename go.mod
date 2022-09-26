@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/cosmos/cosmos-sdk v0.45.5-0.20220523154235-2921a1c3c918
+	github.com/cosmos/ibc-go v1.1.0
 	github.com/gogo/protobuf v1.3.3
 	github.com/kaifei-bianjie/common-parser v0.0.0-20220923023138-65dfc81a8ff5
 	github.com/stretchr/testify v1.7.5

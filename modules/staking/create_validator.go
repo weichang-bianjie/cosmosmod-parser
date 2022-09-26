@@ -2,6 +2,7 @@ package staking
 
 import (
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
+	cdc "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
@@ -41,10 +42,13 @@ func (m *DocTxMsgCreateValidator) BuildMsg(txMsg interface{}) {
 }
 func (m *DocTxMsgCreateValidator) HandleTxMsg(v SdkMsg) MsgDocInfo {
 
-	var addrs []string
+	var (
+		addrs []string
+		msg   MsgStakeCreate
+	)
 
-	msg := v.(*MsgStakeCreate)
-
+	data, _ := cdc.GetMarshaler().MarshalJSON(v)
+	cdc.GetMarshaler().UnmarshalJSON(data, &msg)
 	addrs = append(addrs, msg.DelegatorAddress, msg.ValidatorAddress)
 	handler := func() (Msg, []string) {
 		return m, addrs
