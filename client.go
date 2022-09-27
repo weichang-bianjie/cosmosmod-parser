@@ -10,6 +10,7 @@ import (
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/evidence"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/feegrant"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/gov"
+	"github.com/kaifei-bianjie/cosmosmod-parser/modules/ibc"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/params"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/slashing"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/staking"
@@ -28,6 +29,7 @@ type MsgClient struct {
 	Slashing     Client
 	Staking      Client
 	Upgrade      Client
+	Ibc          Client
 }
 
 func NewMsgClient() MsgClient {
@@ -44,5 +46,6 @@ func NewMsgClient() MsgClient {
 		Slashing:     slashing.NewClient(),
 		Upgrade:      upgrade.NewClient(),
 		Staking:      staking.NewClient(),
+		Ibc:          ibc.NewClient(),
 	}
 }

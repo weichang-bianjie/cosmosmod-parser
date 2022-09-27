@@ -1,6 +1,7 @@
 package gov
 
 import (
+	cdc "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	models "github.com/kaifei-bianjie/common-parser/types"
 	"github.com/kaifei-bianjie/common-parser/utils"
@@ -56,8 +57,13 @@ func CovertContent(content GovContent) interface{} {
 
 func (m *DocTxMsgSubmitProposal) HandleTxMsg(v SdkMsg) MsgDocInfo {
 
-	var addrs []string
-	msg := v.(*MsgSubmitProposal)
+	var (
+		addrs []string
+		msg   MsgSubmitProposal
+	)
+
+	data, _ := cdc.GetMarshaler().MarshalJSON(v)
+	cdc.GetMarshaler().UnmarshalJSON(data, &msg)
 
 	content := msg.GetContent()
 	if content != nil && ProposalTypeCommunityPoolSpend == content.ProposalType() {
