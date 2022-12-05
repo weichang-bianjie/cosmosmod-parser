@@ -25,7 +25,7 @@ func MakeEncodingConfig() {
 
 	commoncodec.Encodecfg = params.EncodingConfig{
 		InterfaceRegistry: interfaceRegistry,
-		Marshaler:         marshaler,
+		Codec:             marshaler,
 		TxConfig:          txCfg,
 		Amino:             cdc,
 	}
