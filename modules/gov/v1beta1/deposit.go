@@ -1,4 +1,4 @@
-package gov
+package v1beta1
 
 import (
 	. "github.com/kaifei-bianjie/common-parser/modules"
@@ -13,15 +13,15 @@ type DocTxMsgDeposit struct {
 	Amount     []types.Coin `bson:"amount"`      // Coins to add to the proposal's deposit
 }
 
-func (doctx *DocTxMsgDeposit) GetType() string {
+func (m *DocTxMsgDeposit) GetType() string {
 	return MsgTypeDeposit
 }
 
-func (doctx *DocTxMsgDeposit) BuildMsg(txMsg interface{}) {
+func (m *DocTxMsgDeposit) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgDeposit)
-	doctx.Depositor = msg.Depositor
-	doctx.Amount = types.BuildDocCoins(msg.Amount)
-	doctx.ProposalID = int64(msg.ProposalId)
+	m.Depositor = msg.Depositor
+	m.Amount = types.BuildDocCoins(msg.Amount)
+	m.ProposalID = int64(msg.ProposalId)
 }
 
 func (m *DocTxMsgDeposit) HandleTxMsg(v SdkMsg) MsgDocInfo {

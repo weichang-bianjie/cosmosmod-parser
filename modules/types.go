@@ -1,19 +1,22 @@
 package msgs
 
 import (
+	authz "github.com/cosmos/cosmos-sdk/x/authz"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 	crisis "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	evidence "github.com/cosmos/cosmos-sdk/x/evidence/types"
 	"github.com/cosmos/cosmos-sdk/x/feegrant"
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
+	govv1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
+	govv1beta1 "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+	"github.com/cosmos/cosmos-sdk/x/group"
 	slashing "github.com/cosmos/cosmos-sdk/x/slashing/types"
 	stake "github.com/cosmos/cosmos-sdk/x/staking/types"
-	ibctransfer "github.com/cosmos/ibc-go/modules/apps/transfer/types"
-	ibcclient "github.com/cosmos/ibc-go/modules/core/02-client/types"
-	ibcconnect "github.com/cosmos/ibc-go/modules/core/03-connection/types"
-	ibc "github.com/cosmos/ibc-go/modules/core/04-channel/types"
-	ibcchannel "github.com/cosmos/ibc-go/modules/core/04-channel/types"
+	ibctransfer "github.com/cosmos/ibc-go/v5/modules/apps/transfer/types"
+	ibcclient "github.com/cosmos/ibc-go/v5/modules/core/02-client/types"
+	ibcconnect "github.com/cosmos/ibc-go/v5/modules/core/03-connection/types"
+	ibc "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
+	ibcchannel "github.com/cosmos/ibc-go/v5/modules/core/04-channel/types"
 )
 
 const (
@@ -23,12 +26,13 @@ const (
 	MsgTypeGrantAllowance  = "grant_allowance"
 	MsgTypeRevokeAllowance = "revoke_allowance"
 
-	MsgTypeStakeCreateValidator = "create_validator"
-	MsgTypeStakeEditValidator   = "edit_validator"
-	MsgTypeStakeDelegate        = "delegate"
-	MsgTypeStakeBeginUnbonding  = "begin_unbonding"
-	MsgTypeBeginRedelegate      = "begin_redelegate"
-	MsgTypeUnjail               = "unjail"
+	MsgTypeStakeCreateValidator      = "create_validator"
+	MsgTypeStakeEditValidator        = "edit_validator"
+	MsgTypeStakeDelegate             = "delegate"
+	MsgTypeStakeBeginUnbonding       = "begin_unbonding"
+	MsgTypeBeginRedelegate           = "begin_redelegate"
+	MsgTypeUnjail                    = "unjail"
+	MsgTypeCancelUnbondingDelegation = "cancel_unbonding_delegation"
 
 	MsgTypeSetWithdrawAddress             = "set_withdraw_address"
 	MsgTypeWithdrawDelegatorReward        = "withdraw_delegator_reward"
@@ -67,20 +71,40 @@ const (
 	MsgTypeTimeout             = "timeout_packet"
 	MsgTypeTimeoutOnClose      = "timeout_on_close_packet"
 	MsgTypeAcknowledgement     = "acknowledge_packet"
+
+	MsgTypeAuthzRevoke = "revoke"
+	MsgTypeAuthzExec   = "exec"
+	MsgTypeAuthzGrant  = "grant"
+
+	MsgTypeCreateGroup                     = "create_group"
+	MsgTypeUpdateGroupMembers              = "update_group_members"
+	MsgTypeUpdateGroupAdmin                = "update_group_admin"
+	MsgTypeUpdateGroupMetadata             = "update_group_metadata"
+	MsgTypeCreateGroupPolicy               = "create_group_policy"
+	MsgTypeCreateGroupWithPolicy           = "create_group_with_policy"
+	MsgTypeUpdateGroupPolicyAdmin          = "update_group_policy_admin"
+	MsgTypeUpdateGroupPolicyDecisionPolicy = "update_group_policy_decision_policy"
+	MsgTypeUpdateGroupPolicyMetadata       = "update_group_policy_metadata"
+	MsgTypeGroupSubmitProposal             = "submit_proposal"
+	MsgTypeWithdrawProposal                = "withdraw_proposal"
+	MsgTypeGroupVote                       = "vote"
+	MsgTypeGroupExec                       = "exec"
+	MsgTypeLeaveGroup                      = "group"
 )
 
 type (
 	MsgSend      = bank.MsgSend
 	MsgMultiSend = bank.MsgMultiSend
 
-	MsgStakeCreate         = stake.MsgCreateValidator
-	MsgStakeEdit           = stake.MsgEditValidator
-	MsgStakeDelegate       = stake.MsgDelegate
-	MsgStakeBeginUnbonding = stake.MsgUndelegate
-	MsgBeginRedelegate     = stake.MsgBeginRedelegate
-	StakeValidator         = stake.Validator
-	Delegation             = stake.Delegation
-	UnbondingDelegation    = stake.UnbondingDelegation
+	MsgStakeCreate               = stake.MsgCreateValidator
+	MsgStakeEdit                 = stake.MsgEditValidator
+	MsgStakeDelegate             = stake.MsgDelegate
+	MsgStakeBeginUnbonding       = stake.MsgUndelegate
+	MsgBeginRedelegate           = stake.MsgBeginRedelegate
+	MsgCancelUnbondingDelegation = stake.MsgCancelUnbondingDelegation
+	StakeValidator               = stake.Validator
+	Delegation                   = stake.Delegation
+	UnbondingDelegation          = stake.UnbondingDelegation
 
 	MsgUnjail                      = slashing.MsgUnjail
 	MsgStakeSetWithdrawAddress     = distribution.MsgSetWithdrawAddress
@@ -91,14 +115,22 @@ type (
 	MsgGrantAllowance  = feegrant.MsgGrantAllowance
 	MsgRevokeAllowance = feegrant.MsgRevokeAllowance
 
-	MsgDeposit        = gov.MsgDeposit
-	MsgSubmitProposal = gov.MsgSubmitProposal
-	TextProposal      = gov.TextProposal
-	MsgVote           = gov.MsgVote
-	Proposal          = gov.Proposal
-	SdkVote           = gov.Vote
-	GovContent        = gov.Content
-	MsgVoteWeighted   = gov.MsgVoteWeighted
+	//gov v1bata1
+	MsgDeposit        = govv1beta1.MsgDeposit
+	MsgSubmitProposal = govv1beta1.MsgSubmitProposal
+	TextProposal      = govv1beta1.TextProposal
+	MsgVote           = govv1beta1.MsgVote
+	Proposal          = govv1beta1.Proposal
+	SdkVote           = govv1beta1.Vote
+	GovContent        = govv1beta1.Content
+	MsgVoteWeighted   = govv1beta1.MsgVoteWeighted
+
+	//gov v1
+	MsgSubmitProposalV1  = govv1.MsgSubmitProposal
+	MsgExecLegacyContent = govv1.MsgExecLegacyContent
+	MsgVoteV1            = govv1.MsgVote
+	MsgVoteWeightedV1    = govv1.MsgVoteWeighted
+	MsgDepositV1         = govv1.MsgDeposit
 
 	MsgSubmitEvidence  = evidence.MsgSubmitEvidence
 	MsgVerifyInvariant = crisis.MsgVerifyInvariant
@@ -127,4 +159,24 @@ type (
 	MsgAcknowledgement     = ibcchannel.MsgAcknowledgement
 	MsgTimeout             = ibcchannel.MsgTimeout
 	MsgTimeoutOnClose      = ibcchannel.MsgTimeoutOnClose
+
+	MsgRevoke            = authz.MsgRevoke
+	MsgExec              = authz.MsgExec
+	MsgGrant             = authz.MsgGrant
+	GenericAuthorization = authz.GenericAuthorization
+
+	MsgCreateGroup                     = group.MsgCreateGroup
+	MsgUpdateGroupMembers              = group.MsgUpdateGroupMembers
+	MsgUpdateGroupAdmin                = group.MsgUpdateGroupAdmin
+	MsgUpdateGroupMetadata             = group.MsgUpdateGroupMetadata
+	MsgCreateGroupPolicy               = group.MsgCreateGroupPolicy
+	MsgCreateGroupWithPolicy           = group.MsgCreateGroupWithPolicy
+	MsgUpdateGroupPolicyAdmin          = group.MsgUpdateGroupPolicyAdmin
+	MsgUpdateGroupPolicyDecisionPolicy = group.MsgUpdateGroupPolicyDecisionPolicy
+	MsgUpdateGroupPolicyMetadata       = group.MsgUpdateGroupPolicyMetadata
+	MsgGroupSubmitProposal             = group.MsgSubmitProposal
+	MsgWithdrawProposal                = group.MsgWithdrawProposal
+	MsgGroupVote                       = group.MsgVote
+	MsgGroupExec                       = group.MsgExec
+	MsgLeaveGroup                      = group.MsgLeaveGroup
 )

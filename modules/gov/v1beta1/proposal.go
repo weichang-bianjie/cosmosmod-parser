@@ -1,4 +1,4 @@
-package gov
+package v1beta1
 
 import (
 	models "github.com/kaifei-bianjie/common-parser/types"
