@@ -20,10 +20,7 @@ func (m *DocMsgExec) BuildMsg(v interface{}) {
 	msg := v.(*MsgExec)
 	m.Grantee = msg.Grantee
 	msgs := make([]interface{}, 0, len(msg.Msgs))
-	messages, err := msg.GetMessages()
-	if err != nil {
-
-	}
+	messages, _ := msg.GetMessages()
 	for _, m := range messages {
 		msgs = append(msgs, m)
 	}
