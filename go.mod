@@ -7,6 +7,7 @@ require (
 	github.com/cosmos/ibc-go/v5 v5.0.1
 	github.com/gogo/protobuf v1.3.3
 	github.com/kaifei-bianjie/common-parser v0.0.0-20221202072759-61d0e0bc62a8
+	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
 )
 

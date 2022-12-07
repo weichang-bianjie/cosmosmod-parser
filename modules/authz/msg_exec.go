@@ -1,8 +1,11 @@
 package authz
 
 import (
+	"encoding/json"
+	commoncodec "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+	"github.com/sirupsen/logrus"
 )
 
 type (
@@ -21,8 +24,18 @@ func (m *DocMsgExec) BuildMsg(v interface{}) {
 	m.Grantee = msg.Grantee
 	msgs := make([]interface{}, 0, len(msg.Msgs))
 	messages, _ := msg.GetMessages()
-	for _, m := range messages {
-		msgs = append(msgs, m)
+	for _, message := range messages {
+		marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(message)
+		if err != nil {
+			logrus.Errorf("DocMsgExec commoncodec.GetMarshaler().MarshalJSON err:%v", err)
+		}
+
+		var msgInterface interface{}
+		if err = json.Unmarshal(marshalJSON, &msgInterface); err != nil {
+			logrus.Errorf("DocMsgExec json.Unmarshal err:%v", err)
+		}
+
+		msgs = append(msgs, msgInterface)
 	}
 	m.Msgs = msgs
 }
