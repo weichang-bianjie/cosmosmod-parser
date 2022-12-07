@@ -13,7 +13,7 @@ type (
 	DocMsgGrant struct {
 		Granter string `bson:"granter"`
 		Grantee string `bson:"grantee"`
-		Grant   Grant  `bson:"msgs"`
+		Grant   Grant  `bson:"grant"`
 	}
 
 	Grant struct {
