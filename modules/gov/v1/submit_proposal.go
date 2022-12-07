@@ -1,10 +1,13 @@
 package v1
 
 import (
+	"encoding/json"
+	commoncodec "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	models "github.com/kaifei-bianjie/common-parser/types"
 	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+	"github.com/sirupsen/logrus"
 )
 
 type DocTxMsgSubmitProposalV1 struct {
@@ -23,7 +26,17 @@ func (m *DocTxMsgSubmitProposalV1) BuildMsg(txMsg interface{}) {
 	messages := make([]interface{}, 0, len(msg.Messages))
 	msgs, _ := msg.GetMsgs()
 	for _, message := range msgs {
-		messages = append(messages, message)
+		marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(message)
+		if err != nil {
+			logrus.Errorf("DocTxMsgSubmitProposalV1 commoncodec.GetMarshaler().MarshalJSON err:%v", err)
+		}
+
+		var msgInterface interface{}
+		if err = json.Unmarshal(marshalJSON, &msgInterface); err != nil {
+			logrus.Errorf("DocTxMsgSubmitProposalV1 json.Unmarshal err:%v", err)
+		}
+
+		messages = append(messages, msgInterface)
 	}
 	m.Messages = messages
 	m.InitialDeposit = models.BuildDocCoins(msg.InitialDeposit)

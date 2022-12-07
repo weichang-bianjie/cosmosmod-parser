@@ -1,8 +1,11 @@
 package authz
 
 import (
+	"encoding/json"
+	commoncodec "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -27,7 +30,17 @@ func (m *DocMsgGrant) BuildMsg(v interface{}) {
 	msg := v.(*MsgGrant)
 	m.Granter = msg.Granter
 	m.Grantee = msg.Grantee
-	m.Grant.Authorization = msg.Grant.Authorization.GetCachedValue().(*GenericAuthorization)
+
+	marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(msg.Grant.Authorization)
+	if err != nil {
+		logrus.Errorf("DocMsgGrant commoncodec.GetMarshaler().MarshalJSON err:%v", err)
+	}
+
+	var authorization interface{}
+	if err = json.Unmarshal(marshalJSON, &authorization); err != nil {
+		logrus.Errorf("DocMsgGrant json.Unmarshal err:%v", err)
+	}
+	m.Grant.Authorization = authorization
 	m.Grant.Expiration = msg.Grant.Expiration
 }
 

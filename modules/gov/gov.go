@@ -30,6 +30,9 @@ func (gov GovClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 		docMsg := govv1beta1.DocTxMsgVoteWeighted{}
 		return docMsg.HandleTxMsg(msg), true
 
+	case *MsgExecLegacyContent:
+		docMsg := govv1.DocTxMsgSubmitProposalV1{}
+		return docMsg.HandleTxMsg(msg), true
 	case *MsgSubmitProposalV1:
 		docMsg := govv1.DocTxMsgSubmitProposalV1{}
 		return docMsg.HandleTxMsg(msg), true
