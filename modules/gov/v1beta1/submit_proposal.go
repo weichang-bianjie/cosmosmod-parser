@@ -26,12 +26,12 @@ func (m *DocTxMsgSubmitProposal) BuildMsg(txMsg interface{}) {
 
 	marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(msg.Content)
 	if err != nil {
-		logrus.Errorf("DocTxMsgExecLegacyContent commoncodec.GetMarshaler().MarshalJSON err:%v", err)
+		logrus.Errorf("DocTxMsgSubmitProposal commoncodec.GetMarshaler().MarshalJSON err:%v", err)
 	}
 
 	var contentInterface interface{}
 	if err = json.Unmarshal(marshalJSON, &contentInterface); err != nil {
-		logrus.Errorf("DocTxMsgExecLegacyContent json.Unmarshal err:%v", err)
+		logrus.Errorf("DocTxMsgSubmitProposal json.Unmarshal err:%v", err)
 	}
 	m.Content = contentInterface
 	m.Proposer = msg.Proposer
