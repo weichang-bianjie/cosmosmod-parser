@@ -24,8 +24,7 @@ func (m *DocTxMsgSubmitProposalV1) GetType() string {
 func (m *DocTxMsgSubmitProposalV1) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgSubmitProposalV1)
 	messages := make([]interface{}, 0, len(msg.Messages))
-	msgs, _ := msg.GetMsgs()
-	for _, message := range msgs {
+	for _, message := range msg.Messages {
 		marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(message)
 		if err != nil {
 			logrus.Errorf("DocTxMsgSubmitProposalV1 commoncodec.GetMarshaler().MarshalJSON err:%v", err)

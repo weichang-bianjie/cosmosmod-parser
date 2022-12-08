@@ -23,8 +23,7 @@ func (m *DocMsgExec) BuildMsg(v interface{}) {
 	msg := v.(*MsgExec)
 	m.Grantee = msg.Grantee
 	msgs := make([]interface{}, 0, len(msg.Msgs))
-	messages, _ := msg.GetMessages()
-	for _, message := range messages {
+	for _, message := range msg.Msgs {
 		marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(message)
 		if err != nil {
 			logrus.Errorf("DocMsgExec commoncodec.GetMarshaler().MarshalJSON err:%v", err)

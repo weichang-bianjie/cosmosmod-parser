@@ -42,6 +42,7 @@ const (
 	MsgTypeDeposit                        = "deposit"
 	MsgTypeVote                           = "vote"
 	MsgTypeVoteWeighted                   = "vote_weighted"
+	MsgTypeExecLegacyContent              = "exec_legacy_content"
 
 	MsgTypeSubmitEvidence  = "submit_evidence"
 	MsgTypeVerifyInvariant = "verify_invariant"

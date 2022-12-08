@@ -1,11 +1,14 @@
 package v1beta1
 
 import (
+	"encoding/json"
 	cdc "github.com/kaifei-bianjie/common-parser/codec"
+	commoncodec "github.com/kaifei-bianjie/common-parser/codec"
 	. "github.com/kaifei-bianjie/common-parser/modules"
 	models "github.com/kaifei-bianjie/common-parser/types"
 	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
+	"github.com/sirupsen/logrus"
 )
 
 type DocTxMsgSubmitProposal struct {
@@ -20,7 +23,17 @@ func (m *DocTxMsgSubmitProposal) GetType() string {
 
 func (m *DocTxMsgSubmitProposal) BuildMsg(txMsg interface{}) {
 	msg := txMsg.(*MsgSubmitProposal)
-	m.Content = CovertContent(msg.GetContent())
+
+	marshalJSON, err := commoncodec.GetMarshaler().MarshalJSON(msg.Content)
+	if err != nil {
+		logrus.Errorf("DocTxMsgExecLegacyContent commoncodec.GetMarshaler().MarshalJSON err:%v", err)
+	}
+
+	var contentInterface interface{}
+	if err = json.Unmarshal(marshalJSON, &contentInterface); err != nil {
+		logrus.Errorf("DocTxMsgExecLegacyContent json.Unmarshal err:%v", err)
+	}
+	m.Content = contentInterface
 	m.Proposer = msg.Proposer
 	m.InitialDeposit = models.BuildDocCoins(msg.InitialDeposit)
 }
