@@ -2,8 +2,8 @@ package ibc
 
 import (
 	"fmt"
-	icoreclient "github.com/cosmos/ibc-go/modules/core/02-client/types"
-	icorechannel "github.com/cosmos/ibc-go/modules/core/04-channel/types"
+	icoreclient "github.com/cosmos/ibc-go/v7/modules/core/02-client/types"
+	icorechannel "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
 	cdc "github.com/kaifei-bianjie/common-parser/codec"
 	"github.com/kaifei-bianjie/common-parser/utils"
 	. "github.com/kaifei-bianjie/cosmosmod-parser/modules"
