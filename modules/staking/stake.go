@@ -30,6 +30,9 @@ func (staking StakingClient) HandleTxMsg(v sdk.Msg) (MsgDocInfo, bool) {
 	case *MsgStakeCreate:
 		docMsg := DocTxMsgCreateValidator{}
 		return docMsg.HandleTxMsg(msg), true
+	case *MsgCancelUnbondingDelegation:
+		docMsg := DocTxMsgCancelUnbondingDelegation{}
+		return docMsg.HandleTxMsg(msg), true
 	}
 	return MsgDocInfo{}, false
 }

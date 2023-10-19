@@ -82,10 +82,10 @@ type Packet struct {
 	TimeoutTimestamp   int64      `bson:"timeout_timestamp"`
 }
 
-//FungibleTokenPacketData
+// FungibleTokenPacketData
 type PacketData struct {
 	Denom    string `bson:"denom" json:"denom"`
-	Amount   int64  `bson:"amount" json:"amount"`
+	Amount   string `bson:"amount" json:"amount"`
 	Sender   string `bson:"sender" json:"sender"`
 	Receiver string `bson:"receiver" json:"receiver"`
 }

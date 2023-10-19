@@ -4,12 +4,14 @@ import (
 	. "github.com/kaifei-bianjie/common-parser"
 	"github.com/kaifei-bianjie/cosmosmod-parser/codec"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/auth"
+	"github.com/kaifei-bianjie/cosmosmod-parser/modules/authz"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/bank"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/crisis"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/distribution"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/evidence"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/feegrant"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/gov"
+	"github.com/kaifei-bianjie/cosmosmod-parser/modules/group"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/ibc"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/params"
 	"github.com/kaifei-bianjie/cosmosmod-parser/modules/slashing"
@@ -30,6 +32,8 @@ type MsgClient struct {
 	Staking      Client
 	Upgrade      Client
 	Ibc          Client
+	Authz        Client
+	Group        Client
 }
 
 func NewMsgClient() MsgClient {
@@ -47,5 +51,7 @@ func NewMsgClient() MsgClient {
 		Upgrade:      upgrade.NewClient(),
 		Staking:      staking.NewClient(),
 		Ibc:          ibc.NewClient(),
+		Authz:        authz.NewClient(),
+		Group:        group.NewClient(),
 	}
 }
