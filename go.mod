@@ -3,6 +3,7 @@ module github.com/kaifei-bianjie/cosmosmod-parser
 go 1.18
 
 require (
+	github.com/bianjieai/nft-transfer v1.1.2-ibc-v6.1.0.0.20230911023600-fa7bd3f3cb1e
 	github.com/cosmos/cosmos-sdk v0.47.4
 	github.com/cosmos/ibc-go/v7 v7.3.0
 	github.com/gogo/protobuf v1.3.3

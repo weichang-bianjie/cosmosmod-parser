@@ -8,9 +8,9 @@ import (
 
 // MsgUpdateClient defines a message to update an IBC client
 type DocMsgUpdateClient struct {
-	ClientId string `bson:"client_id" yaml:"client_id"`
-	Header   string `bson:"header" yaml:"header"`
-	Signer   string `bson:"signer" yaml:"signer"`
+	ClientId      string `bson:"client_id"`
+	ClientMessage string `bson:"client_message"`
+	Signer        string `bson:"signer"`
 }
 
 func (m *DocMsgUpdateClient) GetType() string {
@@ -22,7 +22,7 @@ func (m *DocMsgUpdateClient) BuildMsg(v interface{}) {
 
 	m.ClientId = msg.ClientId
 	m.Signer = msg.Signer
-	m.Header = ConvertAny(msg.Header)
+	m.ClientMessage = ConvertAny(msg.ClientMessage)
 }
 
 func (m *DocMsgUpdateClient) HandleTxMsg(v SdkMsg) MsgDocInfo {

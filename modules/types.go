@@ -1,7 +1,8 @@
 package msgs
 
 import (
-	authz "github.com/cosmos/cosmos-sdk/x/authz"
+	nfttransfer "github.com/bianjieai/nft-transfer/types"
+	"github.com/cosmos/cosmos-sdk/x/authz"
 	bank "github.com/cosmos/cosmos-sdk/x/bank/types"
 	crisis "github.com/cosmos/cosmos-sdk/x/crisis/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
@@ -91,6 +92,8 @@ const (
 	MsgTypeGroupVote                       = "vote"
 	MsgTypeGroupExec                       = "exec"
 	MsgTypeLeaveGroup                      = "group"
+	//nft transfer
+	MsgTypeNftTransfer = "nft_transfer"
 )
 
 type (
@@ -135,6 +138,9 @@ type (
 
 	MsgSubmitEvidence  = evidence.MsgSubmitEvidence
 	MsgVerifyInvariant = crisis.MsgVerifyInvariant
+
+	NonFungibleTokenIbcPacketData = nfttransfer.NonFungibleTokenPacketData
+	NftMsgTransfer                = nfttransfer.MsgTransfer
 
 	FungibleTokenPacketData = ibctransfer.FungibleTokenPacketData
 	MsgRecvPacket           = ibc.MsgRecvPacket

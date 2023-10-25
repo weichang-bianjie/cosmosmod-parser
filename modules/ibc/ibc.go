@@ -25,6 +25,9 @@ func (ibc IbcClient) HandleTxMsg(v types.Msg) (MsgDocInfo, bool) {
 	case *MsgTransfer:
 		docMsg := DocMsgTransfer{}
 		msgDocInfo = docMsg.HandleTxMsg(msg)
+	case *NftMsgTransfer:
+		docMsg := DocNftMsgTransfer{}
+		msgDocInfo = docMsg.HandleTxMsg(msg)
 	case *MsgCreateClient:
 		docMsg := DocMsgCreateClient{}
 		msgDocInfo = docMsg.HandleTxMsg(msg)
